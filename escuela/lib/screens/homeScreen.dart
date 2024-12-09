@@ -6,6 +6,9 @@ import 'package:flutter/material.dart';
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -13,21 +16,20 @@ class HomeScreen extends StatelessWidget {
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
-            fontFamily: 'Roboto', // Fuente más moderna
+            fontFamily: 'Roboto',
           ),
         ),
-        centerTitle: true, // Centra el título en la AppBar
-        backgroundColor: Colors.teal, // Color de fondo más atractivo
+        centerTitle: true,
+        backgroundColor: Colors.teal,
       ),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
             image: NetworkImage(
                 'https://www.marista.edu.mx/files/media/image/element_e5d151c944dfa8fcca89f4e1d45ac474.jpg'),
-            fit: BoxFit.cover, // Asegura que la imagen cubra toda la pantalla
+            fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
-              Colors.black
-                  .withOpacity(0.3), // Aplica un filtro oscuro a la imagen
+              Colors.black.withOpacity(0.3),
               BlendMode.darken,
             ),
           ),
@@ -35,8 +37,7 @@ class HomeScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
-            mainAxisAlignment:
-                MainAxisAlignment.center, // Centra todo el contenido
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 'Por favor, selecciona tu rol para iniciar sesión:',
@@ -44,18 +45,16 @@ class HomeScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
-                  color: Colors.white, // Color blanco para el texto
+                  color: Colors.white,
                 ),
               ),
-              SizedBox(height: 30), // Espacio entre el texto y los botones
+              SizedBox(height: screenHeight * 0.05),
               GridView.count(
-                shrinkWrap:
-                    true, // Hace que el GridView ocupe solo el espacio necesario
-                crossAxisCount: 3, // 3 columnas para los cuadros
-                crossAxisSpacing: 20, // Espacio horizontal entre los cuadros
-                mainAxisSpacing: 20, // Espacio vertical entre los cuadros
-                childAspectRatio:
-                    2, // Ajusta la relación de aspecto de los cuadros
+                shrinkWrap: true,
+                crossAxisCount: screenWidth < 600 ? 2 : 3,
+                crossAxisSpacing: 20,
+                mainAxisSpacing: 20,
+                childAspectRatio: screenWidth < 600 ? 1 : 2,
                 children: [
                   _buildRoleCard(context, 'Admin', LoginAdminScreen()),
                   _buildRoleCard(context, 'Alumno', LoginAlumnoScreen()),
@@ -78,10 +77,10 @@ class HomeScreen extends StatelessWidget {
         );
       },
       child: Card(
-        color: Colors.white.withOpacity(0.7), // Cuadro con mayor opacidad
-        elevation: 10, // Aumenta la sombra para un efecto más pronunciado
+        color: Colors.white.withOpacity(0.7),
+        elevation: 10,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20), // Bordes más redondeados
+          borderRadius: BorderRadius.circular(20),
         ),
         child: Center(
           child: Padding(
@@ -91,9 +90,9 @@ class HomeScreen extends StatelessWidget {
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
-                color: Colors.teal, // Color que destaca para el texto
+                color: Colors.teal,
               ),
-              textAlign: TextAlign.center, // Centra el texto dentro del cuadro
+              textAlign: TextAlign.center,
             ),
           ),
         ),

@@ -4,13 +4,13 @@ import 'package:escuela/models/user.dart';
 
 class UserController {
   final String baseUrl =
-      'http://localhost:3000/api/users'; // Cambiar por la URL de tu servidor
+      'https://escuela-idiomas-backend.onrender.com/api/users'; // Cambiar por la URL de tu servidor
 
   // Enviar la solicitud de login al backend
   Future<Map<String, dynamic>?> loginUser(
       String matricula, String password) async {
     final response = await http.post(
-      Uri.parse('http://localhost:3000/api/users/login'),
+      Uri.parse('https://escuela-idiomas-backend.onrender.com/api/users/login'),
       headers: {'Content-Type': 'application/json'},
       body: json.encode({'matricula': matricula, 'password': password}),
     );

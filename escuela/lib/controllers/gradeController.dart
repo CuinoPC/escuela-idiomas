@@ -3,7 +3,8 @@ import 'package:http/http.dart' as http;
 import 'package:escuela/models/grade.dart';
 
 class GradeController {
-  final String baseUrl = 'http://localhost:3000/api/grades'; // URL de tu API
+  final String baseUrl =
+      'https://escuela-idiomas-backend.onrender.com/api/grades'; // URL de tu API
 
   // Obtener las calificaciones por profesor
   Future<List<Grade>> fetchGradesByProfessor(String professorId) async {

@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 
 class ApiService {
   static const String baseUrl =
-      'http://localhost:3000'; // Cambia la URL según sea necesario
+      'https://escuela-idiomas-backend.onrender.com'; // Cambia la URL según sea necesario
 
   static Future<String?> get(String endpoint) async {
     final response = await http.get(Uri.parse('$baseUrl$endpoint'));

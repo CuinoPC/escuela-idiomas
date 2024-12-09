@@ -65,117 +65,110 @@ class _LoginAlumnoScreenState extends State<LoginAlumnoScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Login de Alumno'),
-        backgroundColor: Colors.teal, // Color atractivo para la AppBar
+        backgroundColor: Colors.teal,
       ),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              Colors.teal.shade200,
-              Colors.teal.shade600
-            ], // Degradado suave
+            colors: [Colors.teal.shade200, Colors.teal.shade600],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
         ),
         child: Center(
-          // Centrar el cuadro de login
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Container(
-              width: 350, // Establecer un ancho fijo
-              height: 350, // Establecer un alto fijo (cuadrado)
+              width: 350,
+              padding: const EdgeInsets.all(20.0),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(16), // Bordes redondeados
+                borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.2), // Sombra suave
-                    blurRadius: 8, // Difuminar la sombra
-                    offset: Offset(0, 4), // Dirección de la sombra
+                    color: Colors.black.withOpacity(0.2),
+                    blurRadius: 8,
+                    offset: Offset(0, 4),
                   ),
                 ],
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Inicia sesión como Alumno',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.teal.shade700, // Color para el título
-                      ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'Inicia sesión como Alumno',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.teal.shade700,
                     ),
-                    SizedBox(height: 20), // Espacio entre título y campos
-
-                    // Campo Matrícula
-                    TextField(
-                      controller: matriculaController,
-                      decoration: InputDecoration(
-                        labelText: 'Matrícula',
-                        labelStyle: TextStyle(color: Colors.teal),
-                        filled: true,
-                        fillColor: Colors.teal.shade50, // Fondo suave
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: Colors.teal.shade300),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 20), // Espacio entre los campos
-
-                    // Campo Contraseña
-                    TextField(
-                      controller: passwordController,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        labelText: 'Contraseña',
-                        labelStyle: TextStyle(color: Colors.teal),
-                        filled: true,
-                        fillColor: Colors.teal.shade50, // Fondo suave
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: Colors.teal.shade300),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 30), // Espacio entre los campos y el botón
-
-                    // Botón de Login
-                    isLoading
-                        ? CircularProgressIndicator(
-                            valueColor:
-                                AlwaysStoppedAnimation<Color>(Colors.teal),
-                          )
-                        : ElevatedButton(
-                            onPressed: login,
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.teal
-                                  .shade700, // Color atractivo para el botón
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 16.0, horizontal: 40.0),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                            ),
-                            child: Text(
-                              'Iniciar sesión',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
+                  ),
+                  SizedBox(height: 20),
+                  // Campo Matrícula con Icono
+                  _buildTextField(
+                    controller: matriculaController,
+                    label: 'Matrícula',
+                    icon: Icons.account_circle,
+                  ),
+                  SizedBox(height: 20),
+                  // Campo Contraseña con Icono
+                  _buildTextField(
+                    controller: passwordController,
+                    label: 'Contraseña',
+                    icon: Icons.lock,
+                    isPassword: true,
+                  ),
+                  SizedBox(height: 30),
+                  // Botón de Login
+                  isLoading
+                      ? CircularProgressIndicator(
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(Colors.teal),
+                        )
+                      : ElevatedButton(
+                          onPressed: login,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.teal.shade700,
+                            padding: EdgeInsets.symmetric(
+                                vertical: 16.0, horizontal: 40.0),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
                             ),
                           ),
-                  ],
-                ),
+                          child: Text(
+                            'Iniciar sesión',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                ],
               ),
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String label,
+    required IconData icon,
+    bool isPassword = false,
+  }) {
+    return TextField(
+      controller: controller,
+      obscureText: isPassword,
+      decoration: InputDecoration(
+        labelText: label,
+        prefixIcon: Icon(icon, color: Colors.teal),
+        filled: true,
+        fillColor: Colors.teal.shade50,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
         ),
       ),
     );

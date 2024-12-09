@@ -6,8 +6,8 @@ import 'package:escuela/models/subject.dart'; // Importa el modelo Subject
 class SubjectController {
   // Método para obtener las materias (ahora devuelve List<Subject>)
   Future<List<Subject>> fetchSubjects() async {
-    final response =
-        await http.get(Uri.parse('http://localhost:3000/api/subjects'));
+    final response = await http.get(
+        Uri.parse('https://escuela-idiomas-backend.onrender.com/api/subjects'));
 
     if (response.statusCode == 200) {
       final List<dynamic> data = json.decode(response.body);
@@ -21,7 +21,8 @@ class SubjectController {
   Future<void> assignSubjectToStudent(
       String matricula, String subjectName) async {
     final response = await http.post(
-      Uri.parse('http://localhost:3000/api/subjects/assign'),
+      Uri.parse(
+          'https://escuela-idiomas-backend.onrender.com/api/subjects/assign'),
       headers: {'Content-Type': 'application/json'},
       body: json.encode({
         'matricula': matricula,
